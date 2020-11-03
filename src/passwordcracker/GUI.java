@@ -37,7 +37,7 @@ public class GUI {
     public static JTextField result;
     public static JTextArea solvedHashes;
     private static JScrollPane scrollPane;
-    public static JProgressBar progressBar;
+    public static ProgressBar progressBar;
     public static File dictionaryFile;
     public static File hashFile;
     public static JCheckBox cbNumbers;
@@ -221,7 +221,7 @@ public class GUI {
         solvedHashes.setFont(new Font("Tahoma", Font.PLAIN, 12));
  
         //Progress bar
-        progressBar = new JProgressBar(0, 100);
+        progressBar = new ProgressBar();
         progressBar.setValue(0);
         progressBar.setStringPainted(true);
         progressBar.setBounds(209, 599, 466, 20);

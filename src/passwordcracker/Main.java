@@ -302,37 +302,50 @@ public class Main {
 						insertHashes();
 						checkDictionary();
 						// Calculating the max number of processes to run to get percentage of progress
-						int hashLines = Math.toIntExact(Files.lines(Paths.get(GUI.hashFile.getPath())).count());
-						int dictLines = Math.toIntExact(Files.lines(Paths.get(dictionary.getPath())).count());
-						int numToggles = dictLines;
-						int maxProgress = hashLines + (dictLines * (1 + numToggles + numbers.length()));
-						int cProgress = 1;
+						int maxProgress = 1;
+						if(GUI.cbNumbers.isSelected()) {
+							maxProgress++;
+						}
+						
+						if(GUI.cbSpecial.isSelected()) {
+							maxProgress++;
+						}
+						
+						if(GUI.cbToggle.isSelected()) {
+							maxProgress++;
+						}
+						
+						if(GUI.cbReplace.isSelected()) {
+							maxProgress++;
+						}
+						GUI.progressBar.setMax(maxProgress);
 						
 						addDictionary();
+						GUI.progressBar.incrementProgress();
 
 						if(GUI.cbNumbers.isSelected()) {
 							addNumbers();
+							GUI.progressBar.incrementProgress();
 						}
 						
 						if(GUI.cbSpecial.isSelected()) {
 							addSpecialCharacters();
+							GUI.progressBar.incrementProgress();
 						}
 						
 						if(GUI.cbToggle.isSelected()) {
 							toggleCase();
+							GUI.progressBar.incrementProgress();
 						}
 						
 						if(GUI.cbReplace.isSelected()) {
 							replaceCharacters();
+							GUI.progressBar.incrementProgress();
 						}
 
 						selectMatches();
 
-					} catch (FileNotFoundException e3) {
-						System.out.println(e3);
-					}
-
-					catch (Exception e4) {
+					} catch (Exception e4) {
 						System.out.println(e4);
 					} finally {
 						GUI.massCrack.setEnabled(true);
